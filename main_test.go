@@ -2,7 +2,6 @@ package go_video_preview_ffmpeg_wrapper
 
 import (
 	"fmt"
-	"log"
 	"path/filepath"
 	"testing"
 )
@@ -49,7 +48,7 @@ func TestCmd_HappyFlows(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		inputSeconds, errInput := getDurationInSeconds(test.inputVideoPath)
+		_, errInput := getDurationInSeconds(test.inputVideoPath)
 		if errInput != nil {
 			t.Fatalf("Test failed, could not get duration of clip: %v", errInput)
 		}
@@ -69,8 +68,6 @@ func TestCmd_HappyFlows(t *testing.T) {
 		if seconds != test.expectedOutputLengthSeconds {
 			t.Fatalf("Generated clip expected to have duration %vs, but instead is [%vs]", test.expectedOutputLengthSeconds, seconds)
 		}
-
-		log.Printf("Source: %v , preview: %v", inputSeconds, seconds)
 	}
 }
 
